@@ -40,11 +40,11 @@ class BirthdayPickerView: NSObject {
         frame.origin = CGPointMake(0, 0)
         self._datePicker.frame = frame
         self._datePicker.datePickerMode = .Date
-        self._datePicker.date = NSDate.date()
+        self._datePicker.date = NSDate()
         self._datePicker.calendar = NSCalendar.currentCalendar()
         self._datePicker.timeZone = NSTimeZone.localTimeZone()
         self._datePicker.minimumDate = NSDate(timeIntervalSinceNow: -3600 * 24 * 365 * 100)
-        self._datePicker.maximumDate = NSDate.date()
+        self._datePicker.maximumDate = NSDate()
         
         self._toolbar.addSubview(self._datePicker)
         

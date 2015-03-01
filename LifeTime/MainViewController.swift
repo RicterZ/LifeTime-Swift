@@ -25,7 +25,7 @@ class MainViewController: UIViewController, BirthdayPickerViewDelegate {
     var _birthday: NSDate?
     var birthday: NSDate? {
         get {
-            if !_birthday {
+            if (_birthday != nil) {
                 _birthday = NSUserDefaults.standardUserDefaults().objectForKey("Birthday")? as NSDate?
             }
             return _birthday
@@ -62,7 +62,7 @@ class MainViewController: UIViewController, BirthdayPickerViewDelegate {
         self.birthdayLabel!.userInteractionEnabled = true
         let recognizer = UITapGestureRecognizer(target: self, action: Selector("handleTapGesture:"))
         self.birthdayLabel!.addGestureRecognizer(recognizer)
-        self.view.addSubview(self.birthdayLabel)
+        self.view.addSubview(self.birthdayLabel!)
         
         self.titleLabel = UILabel()
         self.yearLabel = UILabel()
@@ -77,12 +77,12 @@ class MainViewController: UIViewController, BirthdayPickerViewDelegate {
         var count = 0
         for label: UILabel? in array {
             count++
-            label!.frame = CGRectMake(0, 50.0 * Float(count + 1), width, 20)
+            label!.frame = CGRectMake(0, 50.0 * CGFloat(count + 1), width, 20)
             label!.textAlignment = .Center
-            self.view.addSubview(label)
+            self.view.addSubview(label!)
         }
         
-        if self.birthday {
+        if self.birthday != nil {
             self.initTimer()
         }
     }
@@ -100,7 +100,7 @@ class MainViewController: UIViewController, BirthdayPickerViewDelegate {
     func updateUI(timer: NSTimer?) {
         var formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        var date = formatter.stringFromDate(birthday)
+        var date = formatter.stringFromDate(birthday!)
         self.birthdayLabel!.text = "Born on \(date)"
         
         var seconds = -Int(self.birthday!.timeIntervalSinceNow)
